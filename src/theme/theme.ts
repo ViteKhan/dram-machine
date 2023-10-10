@@ -4,6 +4,7 @@ import { THEME } from '../types';
 import { colors } from './colors';
 import { Badge } from './components/Badge';
 import { Button } from './components/Button';
+import { Icon } from './components/Icon';
 
 const styles = {
   global: (props: StyleFunctionProps) => ({
@@ -16,11 +17,16 @@ const styles = {
 
 export const theme = extendTheme({
   config: {
-    initialColorMode: THEME.LIGHT,
+    initialColorMode: THEME.DARK,
   },
   components: {
     Badge,
     Button,
+    Icon,
+  },
+  fonts: {
+    body: 'Electrolize, sans-serif',
+    heading: 'Electrolize, sans-serif',
   },
   colors,
   styles,
