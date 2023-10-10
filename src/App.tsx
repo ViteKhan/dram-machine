@@ -1,13 +1,16 @@
-import { Box } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
+import { AppBar } from './components/AppBar';
+import { ContentLayout } from './components/ContentLayout';
 import { DrumMachine } from './components/DrumMachine';
-import { ThemeToggle } from './components/ThemeToggle';
 
 function App() {
   return (
-    <Box minHeight="100vh">
-      <DrumMachine/>
-      <ThemeToggle/>
-    </Box>
+    <Flex flexDirection={'column'} h={'100vh'}>
+      <AppBar/>
+      <ContentLayout>
+        <DrumMachine/>
+      </ContentLayout>
+    </Flex>
   );
 }
 
