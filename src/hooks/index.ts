@@ -16,3 +16,28 @@ export const useGetColorsByMode = () => {
 };
 
 export const useDrumMachineContext = () => useContext(DrumMachineContext);
+
+export const usePadStyles = (padColor: string, isPlaying: boolean) => {
+  const { isOn } = useDrumMachineContext();
+  const { color } = useGetColorsByMode();
+
+  const activeStyles = {
+    transform: 'scale(0.95)',
+    boxShadow: `1px 1px 4px 4px ${padColor}, -1px -1px 4px 4px ${padColor}`,
+    background: padColor,
+  };
+
+  const inactiveStyles = {
+    transform: 'scale(1)',
+    boxShadow: 'none',
+  };
+
+  const isOffStyles = {
+    opacity: 0.5,
+    borderColor: color,
+  };
+
+  return !isOn
+    ? isOffStyles
+    : isPlaying ? activeStyles : inactiveStyles;
+};

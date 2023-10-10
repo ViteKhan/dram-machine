@@ -19,7 +19,7 @@ export const Board = () => {
   return (
     <BoardContainer background={appBarBg} borderColor={borderColor}>
       {PADS.map(pad => (
-        <GridItem key={pad.id}>
+        <GridItem key={pad.letter}>
           <Pad pad={pad}/>
         </GridItem>
       ))}

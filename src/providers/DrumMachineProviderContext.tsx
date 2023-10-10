@@ -31,9 +31,6 @@ export const DrumMachineContextProvider: FC<DrumMachineContextProviderProps> = (
     const message = !isOn ? 'Hello!' : '';
     setIsOne(prev => !prev);
     onChangeDisplayMessage(message);
-    setTimeout(() => {
-      onChangeDisplayMessage('');
-    }, 1500);
   };
 
   const onChangeVolume = (value: number) => {

@@ -4,9 +4,8 @@ export enum THEME {
 }
 
 export interface Pad {
-  id: string;
+  title: string;
   letter: string;
-  keycode: number;
   url: string;
   color: string;
 }

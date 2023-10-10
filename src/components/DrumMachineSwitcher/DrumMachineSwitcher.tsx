@@ -16,7 +16,6 @@ export const DrumMachineSwitcher = () => {
           opacity: 0.5,
         }}
         onClick={toggleIsOn}
-        onTouch={toggleIsOn}
       />
     </Flex>
   );
