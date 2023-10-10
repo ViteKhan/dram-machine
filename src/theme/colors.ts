@@ -1,9 +1,9 @@
 export const colors = {
-  lightBg: '#d6d7dc',
+  lightBg: '#EEF1F7',
   lightColor: '#001931',
   darkBg: '#171717',
   darkColor: '#FFFFFFB2',
-  appBarLightBg: '#EEF1F7',
+  appBarLightBg: '#d6d7dc',
   appBarDarkBg: '#2D2D2D',
   borderColorDark: '#ffffff4d',
   borderColorLight: '#c6c1c1',

@@ -1,5 +1,7 @@
 import { useColorMode } from '@chakra-ui/react';
+import { useContext } from 'react';
 import { DARK_COLORS, LIGHT_COLORS } from '../constants';
+import { DrumMachineContext } from '../providers';
 import { THEME } from '../types';
 
 export const useIsLightMode = () => {
@@ -13,7 +15,4 @@ export const useGetColorsByMode = () => {
   return isLightMode ? LIGHT_COLORS : DARK_COLORS;
 };
 
-export const useGetInvertColorsByMode = () => {
-  const isLightMode = useIsLightMode();
-  return isLightMode ? DARK_COLORS : LIGHT_COLORS;
-};
+export const useDrumMachineContext = () => useContext(DrumMachineContext);
