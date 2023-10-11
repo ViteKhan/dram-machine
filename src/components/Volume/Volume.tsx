@@ -8,7 +8,7 @@ export const Volume = () => {
   const { volumeInput, onChangeVolume } = useDrumMachineContext();
 
   return (
-    <Slider defaultValue={0} m={'0 0 15px 1px'} value={volumeInput } onChange={onChangeVolume}>
+    <Slider m={'0 0 15px 1px'} value={volumeInput} onChange={onChangeVolume} min={0} max={100}>
       <SliderMark value={0} {...VOLUME_LABEL_STYLES}>
         <FiVolumeX/>
       </SliderMark>

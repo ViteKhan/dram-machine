@@ -13,7 +13,7 @@ export const Pad: FC<PadProps> = ({ pad }) => {
   const styles = usePadStyles(pad.color, isPlaying);
 
   const handleKeyPress = (e: { key: string }) => {
-    if (e.key === pad.letter && isOn) {
+    if (e.key === pad.letter) {
       onPlay();
     }
   };
@@ -49,7 +49,7 @@ export const Pad: FC<PadProps> = ({ pad }) => {
       border={'2px solid'}
       borderColor={pad.color}
       {...styles}
-      onClick={onPlay}
+      // onClick={onPlay}
     >
       <audio id={pad.letter} src={pad.url}/>
       <Kbd>{pad.letter.toUpperCase()}</Kbd>
