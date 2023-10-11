@@ -37,7 +37,6 @@ export const Pad: FC<PadProps> = ({ pad }) => {
       borderColor={pad.color}
       {...styles}
       onClick={onPlay}
-      onTouchStart={onPlay}
     >
       <audio id={pad.letter} src={pad.url}/>
       <Kbd>{pad.letter.toUpperCase()}</Kbd>
