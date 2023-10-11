@@ -19,12 +19,21 @@ export const Pad: FC<PadProps> = ({ pad }) => {
     if (sound) {
       sound.currentTime = 0;
       sound.volume = volume;
-      sound.play();
-      onChangeDisplayMessage(pad.title);
-      setIsPlaying(true);
-      setTimeout(() => {
-        setIsPlaying(false);
-      }, 100);
+      const playPromise = sound.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            onChangeDisplayMessage(pad.title);
+            setIsPlaying(true);
+            setTimeout(() => {
+              setIsPlaying(false);
+            }, 100);
+          })
+          .catch((error) => {
+            console.error('Audio playback failed:', error);
+          });
+      }
     }
   };
 
