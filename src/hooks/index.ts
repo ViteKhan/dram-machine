@@ -48,18 +48,20 @@ export const usePadStyles = (padColor: string, isPlaying: boolean) => {
 
 export const useListeners = (letter: string, isPowered: boolean, onPlay: () => void) => {
   useEffect(() => {
+    const isTouchDevice = 'ontouchstart' in window;
+
     const handleKeyPress = (e: { key: string }) => {
-      if (isPowered && e.key === letter) {
+      if (isPowered && !isTouchDevice && e.key === letter) {
         onPlay();
       }
     };
 
-    if (isPowered) {
+    if (isPowered && !isTouchDevice) {
       document.addEventListener('keydown', handleKeyPress);
     }
 
     return () => {
-      if (isPowered) {
+      if (isPowered && !isTouchDevice) {
         document.removeEventListener('keydown', handleKeyPress);
       }
     };

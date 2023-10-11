@@ -29,7 +29,7 @@ export const Pad: FC<PadProps> = ({ pad }) => {
   };
 
   useListeners(pad.letter, isPowered, onPlay);
-  console.log(window);
+
   return (
     <Button
       variant={'pad'}
