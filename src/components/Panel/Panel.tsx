@@ -2,6 +2,7 @@ import { chakra, Flex } from '@chakra-ui/react';
 import { useGetColorsByMode } from '../../hooks';
 import { Display } from '../Display';
 import { DrumMachineSwitcher } from '../DrumMachineSwitcher';
+import { Speaker } from '../Speaker';
 
 const PanelContainer = chakra(Flex, {
   baseStyle: {
@@ -19,7 +20,10 @@ export const Panel = () => {
     <PanelContainer borderColor={borderColor} bg={appBarBg}>
       <Flex justifyContent={'space-between'} flex={1}>
         <Display/>
-        <DrumMachineSwitcher/>
+        <Flex flexDirection={'column'} justifyContent={'space-between'}>
+          <DrumMachineSwitcher/>
+          <Speaker/>
+        </Flex>
       </Flex>
     </PanelContainer>
   );

@@ -12,20 +12,6 @@ export const Pad: FC<PadProps> = ({ pad }) => {
   const { onChangeDisplayMessage, isOn, volume } = useDrumMachineContext();
   const styles = usePadStyles(pad.color, isPlaying);
 
-  const handleKeyPress = (e: { key: string }) => {
-    if (e.key === pad.letter) {
-      onPlay();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyPress);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyPress);
-    };
-  }, []);
-
   const onPlay = () => {
     if (!isOn) return;
 
@@ -42,6 +28,19 @@ export const Pad: FC<PadProps> = ({ pad }) => {
     }
   };
 
+  const handleKeyPress = (e: { key: string }) => {
+    if (e.key === pad.letter) {
+      onPlay();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyPress);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
+  }, []);
 
   return (
     <Button
@@ -49,7 +48,7 @@ export const Pad: FC<PadProps> = ({ pad }) => {
       border={'2px solid'}
       borderColor={pad.color}
       {...styles}
-      // onClick={onPlay}
+      onClick={onPlay}
     >
       <audio id={pad.letter} src={pad.url}/>
       <Kbd>{pad.letter.toUpperCase()}</Kbd>
