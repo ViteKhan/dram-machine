@@ -1,5 +1,5 @@
 import { useColorMode } from '@chakra-ui/react';
-import { useContext } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import { DARK_COLORS, LIGHT_COLORS } from '../constants';
 import { DrumMachineContext } from '../providers';
 import { THEME } from '../types';
@@ -18,7 +18,7 @@ export const useGetColorsByMode = () => {
 export const useDrumMachineContext = () => useContext(DrumMachineContext);
 
 export const usePadStyles = (padColor: string, isPlaying: boolean) => {
-  const { isOn } = useDrumMachineContext();
+  const { isPowered } = useDrumMachineContext();
   const { color } = useGetColorsByMode();
 
   const activeStyles = {
@@ -37,7 +37,31 @@ export const usePadStyles = (padColor: string, isPlaying: boolean) => {
     borderColor: color,
   };
 
-  return !isOn
-    ? isOffStyles
-    : isPlaying ? activeStyles : inactiveStyles;
+  const styles = useMemo(() => {
+    return !isPowered
+      ? isOffStyles
+      : isPlaying ? activeStyles : inactiveStyles;
+  }, [isPowered, isPlaying]);
+
+  return styles;
+};
+
+export const useListeners = (letter: string, isPowered: boolean, onPlay: () => void) => {
+  useEffect(() => {
+    const handleKeyPress = (e: { key: string }) => {
+      if (isPowered && e.key === letter) {
+        onPlay();
+      }
+    };
+
+    if (isPowered) {
+      document.addEventListener('keydown', handleKeyPress);
+    }
+
+    return () => {
+      if (isPowered) {
+        document.removeEventListener('keydown', handleKeyPress);
+      }
+    };
+  }, [isPowered, onPlay]);
 };

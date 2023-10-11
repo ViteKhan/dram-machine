@@ -1,6 +1,6 @@
 import { Button, Kbd } from '@chakra-ui/react';
-import { FC, useEffect, useState } from 'react';
-import { useDrumMachineContext, usePadStyles } from '../../hooks';
+import { FC, useState } from 'react';
+import { useDrumMachineContext, useListeners, usePadStyles } from '../../hooks';
 import { Pad as PadModel } from '../../types';
 
 interface PadProps {
@@ -9,11 +9,11 @@ interface PadProps {
 
 export const Pad: FC<PadProps> = ({ pad }) => {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const { onChangeDisplayMessage, isOn, volume } = useDrumMachineContext();
+  const { onChangeDisplayMessage, isPowered, volume } = useDrumMachineContext();
   const styles = usePadStyles(pad.color, isPlaying);
 
   const onPlay = () => {
-    if (!isOn) return;
+    if (!isPowered) return;
 
     const sound = document.getElementById(pad.letter) as HTMLAudioElement;
     if (sound) {
@@ -28,19 +28,7 @@ export const Pad: FC<PadProps> = ({ pad }) => {
     }
   };
 
-  const handleKeyPress = (e: { key: string }) => {
-    if (e.key === pad.letter) {
-      onPlay();
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyPress);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyPress);
-    };
-  }, []);
+  useListeners(pad.letter, isPowered, onPlay);
 
   return (
     <Button

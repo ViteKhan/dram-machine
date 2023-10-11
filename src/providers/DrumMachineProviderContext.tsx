@@ -1,8 +1,8 @@
 import { createContext, FC, ReactNode, useState } from 'react';
 
 interface IDrumMachineContext {
-  isOn: boolean;
-  toggleIsOn: () => void;
+  isPowered: boolean;
+  toggleIsPowered: () => void;
   displayMessage: string;
   volumeInput: number;
   volume: number;
@@ -17,9 +17,8 @@ interface DrumMachineContextProviderProps {
 }
 
 export const DrumMachineContextProvider: FC<DrumMachineContextProviderProps> = ({ children }) => {
-  const [isOn, setIsOne] = useState<boolean>(true);
+  const [isPowered, setIsPowered] = useState<boolean>(true);
   const [displayMessage, setDisplayMessage] = useState<string>('');
-
   const [volumeInput, setVolumeInput] = useState(50);
   const [volume, setVolume] = useState(0.5);
 
@@ -27,9 +26,9 @@ export const DrumMachineContextProvider: FC<DrumMachineContextProviderProps> = (
     setDisplayMessage(message);
   };
 
-  const toggleIsOn = () => {
-    const message = !isOn ? 'Hello!' : '';
-    setIsOne(prev => !prev);
+  const toggleIsPowered = () => {
+    const message = !isPowered ? 'Hello!' : '';
+    setIsPowered(prev => !prev);
     onChangeDisplayMessage(message);
   };
 
@@ -44,8 +43,8 @@ export const DrumMachineContextProvider: FC<DrumMachineContextProviderProps> = (
   return (
     <DrumMachineContext.Provider
       value={{
-        isOn,
-        toggleIsOn,
+        isPowered,
+        toggleIsPowered,
         displayMessage,
         onChangeDisplayMessage,
         volume,
