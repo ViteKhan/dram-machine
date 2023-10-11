@@ -19,26 +19,17 @@ export const Pad: FC<PadProps> = ({ pad }) => {
     if (sound) {
       sound.currentTime = 0;
       sound.volume = volume;
-      const playPromise = sound.play();
-
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            onChangeDisplayMessage(pad.title);
-            setIsPlaying(true);
-            setTimeout(() => {
-              setIsPlaying(false);
-            }, 100);
-          })
-          .catch((error) => {
-            console.error('Audio playback failed:', error);
-          });
-      }
+      sound.play();
+      onChangeDisplayMessage(pad.title);
+      setIsPlaying(true);
+      setTimeout(() => {
+        setIsPlaying(false);
+      }, 100);
     }
   };
 
   useListeners(pad.letter, isPowered, onPlay);
-
+  console.log(window);
   return (
     <Button
       variant={'pad'}
@@ -46,6 +37,7 @@ export const Pad: FC<PadProps> = ({ pad }) => {
       borderColor={pad.color}
       {...styles}
       onClick={onPlay}
+      onTouchStart={onPlay}
     >
       <audio id={pad.letter} src={pad.url}/>
       <Kbd>{pad.letter.toUpperCase()}</Kbd>
